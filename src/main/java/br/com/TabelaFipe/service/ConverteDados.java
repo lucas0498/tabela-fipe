@@ -23,8 +23,12 @@ public class ConverteDados implements IConverteDados {
     public <T> List<T> obterLista(String json, Class<T> classe) {
         CollectionType lista = mapper.getTypeFactory()
                 .constructCollectionType(List.class, classe);
+        try{
+            return mapper.readValue(json, lista);
+        } catch(JsonProcessingException e){
+            throw new RuntimeException(e);
+        }
 
-        return null;
     }
 
 }
